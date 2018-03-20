@@ -1,24 +1,21 @@
-from django.shortcuts import render, HttpResponse
-
-# Create your views here.
+from django.shortcuts import render, HttpResponse, get_object_or_404
+from .models import Category
 
 
 def category_list(request):
-    context = {}
-    context['categories'] = [
-        {'id': '1', 'name': 'category #1'},
-        {'id': '2', 'name': 'category #2'},
-        {'id': '3', 'name': 'category #3'},
-    ]
+    categories = Category.objects.all()
+    context = {
+        'categories': categories,
+    }
 
     return render(request, 'categories/category_list.html', context)
 
 
-def category_detail(request, pk = None):
-    context = {}
-    context['category'] = {
-        'name': 'category 1',
-        'id': pk
+def category_detail(request, pk=None):
+    category = get_object_or_404(Category, id=pk)
+    context = {
+        'category': category,
+        'questions': category.questions.all()
     }
 
     return render(request, 'categories/category_detail.html', context)

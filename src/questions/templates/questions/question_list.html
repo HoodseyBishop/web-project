@@ -1,7 +1,11 @@
 {% extends 'core/base.html'%}
 
-{% block title %} All questions here {% endblock %}
+{% block title %} Questions {% endblock %}
 
 {% block content %}
+    {% for question in questions %}
+        <a href="{% url "question_detail" pk=question.id %}"> {{ question.title }}</a><br>
+        asked:{{ question.created }} <br><br>
+    {% endfor %}
 
 {% endblock %}

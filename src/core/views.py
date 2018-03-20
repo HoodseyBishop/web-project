@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse
-
-# Create your views here.
+from categories.models import Category
+from questions.models import Question
 
 
 def main_page(request):
-    return HttpResponse("This is the main page")
+    return render(request, 'core/main.html', {})

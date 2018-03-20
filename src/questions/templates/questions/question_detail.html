@@ -1,0 +1,18 @@
+{% extends 'core/base.html'%}
+
+{% block title %} {{ question.title }} {% endblock %}
+
+{% block content %}
+        Categories:
+        {% for category in categories %}
+            <a href="{% url "category_detail" pk=category.id %}"> {{ category.name }}</a>
+        {% endfor %}
+         <br><br>
+        <b>{{ question.text }}</b> <br><br>
+        {{ answers.count }} answers <br> <br>
+        {% for answer in answers %}
+            {{ answer.text }}<br>
+            answered:{{ answer.created }} <br> <br>
+        {% endfor %}
+
+{% endblock %}

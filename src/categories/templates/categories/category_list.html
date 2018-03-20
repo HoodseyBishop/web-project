@@ -1,9 +1,10 @@
 {% extends 'core/base.html'%}
 
-{% block title %} All categories here {% endblock %}
+{% block title %} Categories {% endblock %}
 
 {% block content %}
     {% for category in categories %}
-        <a href="{% url "category_detail" pk=category.id %}"> {{ category.name }}</a>
+        <a href="{% url "category_detail" pk=category.id %}"> {{ category.name }}</a><br>
+        questions:{{ category.questions.count }} <br><br>
     {% endfor %}
 {% endblock %}
