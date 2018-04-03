@@ -3,9 +3,22 @@
 {% block title %} Questions {% endblock %}
 
 {% block content %}
+    <a href="{% url "question_create" %}"> New question </a> <br><br>
+    <div>
+        <form action="" method="get">
+            {{ questions_form }}
+            <button>Go</button>
+        </form>
+    </div>
     {% for question in questions %}
-        <a href="{% url "question_detail" pk=question.id %}"> {{ question.title }}</a><br>
-        asked:{{ question.created }} <br><br>
+        <a href="{% url "question_detail" pk=question.id%}"> {{ question.title }}</a><br>
+        <p>{{ question.text }}</p>
+        <small>
+            asked {{ question.created }} <br>
+            {{ question.author }}
+            <hr width="512" align="left">
+            <br><br>
+        </small>
     {% endfor %}
 
 {% endblock %}

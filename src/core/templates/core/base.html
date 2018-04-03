@@ -2,11 +2,12 @@
 <a href="{% url "main" %}"> Main</a>
 <a href="{% url "question_list" %}"> Questions</a>
 <a href="{% url "category_list" %}"> Categories</a>
-
+<right><a href="{% url "user_login" %}"> Login</a></right>
+<hr size="5" color="gray">
 
 <h2>{% block title %}{% endblock %}</h2>
 <div>
     {% block content %}{% endblock %}
 </div>
-
-<h5>Copyright @ mc^2+D=pussy</h5>
+<hr size="5" color="gray">
+<center><h5>Copyright @ mc^2+D=pussy</h5></center>

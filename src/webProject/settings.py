@@ -83,8 +83,8 @@ WSGI_APPLICATION = 'webProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'webProject_db',
-        'USER': 'db_user',
+        'NAME': 'DB',
+        'USER': 'DB_user',
         'PASSWORD': 'password',
         'HOST': 'localhost',
     }
@@ -128,3 +128,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_URL = '/users/login/'
+
+
