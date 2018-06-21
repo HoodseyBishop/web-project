@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+{% load crispy_forms_filters %}
+
+{% block header %}{{ user_.username }}{% endblock %}
+{% block title %}{{ user_.username }}{% endblock %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" value="Edit">
+    </form>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% if user.is_authenticated %}
+    <div class="row">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ answer_form }}
+                <input type="submit" value="Send">
+            </form>
+    </div>
+    <br>
+{% endif %}

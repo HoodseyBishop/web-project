@@ -1,0 +1,23 @@
+{% extends 'core/base.html'%}
+
+{% block header %} Users {% endblock %}
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{% url 'main' %}">Main</a></li>
+    <li class="breadcrumb-item active">Users</li>
+{% endblock %}
+
+{% block content %}
+    <ul class="list-group">
+        {% for user in users %}
+            <li class="list-group-item list-group-item-info mt-3">
+                <a href="{% url "user_detail" pk=user.id%}"> {{ user.username }}</a>
+                <hr>
+                <small>
+                    <p>joined {{ user.date_joined }}</p>
+                    <p>last seen {{ user.last_login }}</p>
+                </small>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

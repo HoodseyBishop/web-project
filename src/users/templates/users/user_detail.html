@@ -1,0 +1,12 @@
+{% extends 'core/base.html' %}
+{% load crispy_forms_filters %}
+
+{% block header %}{{ user_.username }}{% endblock %}
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{% url 'main' %}">Main</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'user_list' %}">Users</a></li>
+    <li class="breadcrumb-item active">{{ user_.username }}</li>
+{% endblock %}
+
+{% block content %}
+{% endblock %}

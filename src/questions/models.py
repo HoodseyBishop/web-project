@@ -12,6 +12,8 @@ class Question(models.Model):
     is_archive = models.BooleanField(default=False)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='questions', on_delete=models.CASCADE)
 
+    like_count = models.IntegerField(default=0)
+
     def __str__(self):
         return self.title
 

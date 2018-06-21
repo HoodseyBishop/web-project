@@ -1,10 +1,41 @@
 {% extends 'core/base.html'%}
 
-{% block title %} {{ category.name }} {% endblock %}
+{% block header %} {{ category.name }} {% endblock %}
+{{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{% url 'main' %}">Main</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'category_list' %}">Categories</a></li>
+    <li class="breadcrumb-item active">{{ category.name }}</li>
+{% endblock %}
 
 {% block content %}
+    <ul class="list-group">
         {% for question in questions %}
-            <a href="{% url "question_detail" pk=question.id %}"> {{ question.title }}</a> <br>
-            asked:{{ question.created }} <br><br>
+            <li class="list-group-item list-group-item-info mt-3">
+                <div class="d-flex justify-content-between">
+                    <h6><a href="{% url "question_detail" pk=question.id%}"> {{ question.title }}</a></h6>
+                    {{ question.created }}
+                </div>
+                <hr>
+                <p>{{ question.text }}</p>
+                <small>
+                    <div class="d-flex justify-content-between">
+                        <div class="btn-group btn-group-sm">
+                            {% for category in question.categories.all %}
+                                <a class="btn btn-info" href="{% url "category_detail" pk=category.pk %}"> {{ category.name }}</a>
+                            {% endfor %}
+                        </div>
+                        <a href="{% url "user_detail" pk=question.author.id %}">{{ question.author }}</a>
+                    </div>
+                    {% if question.author == user %}
+                        <a class="btn btn-primary btn-sm float-right" href="{% url "question_edit" pk=question.pk %}"> edit</a>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                        <button class="btn btn-success ajaxlike" data-url="{% url "question_like" pk=question.id %}" data-questionid="{{ question.id }}">{{ question.likes.count }}</button>
+                    {% else %}
+                        <a class="btn btn-success" href="{% url 'user_login' %}">{{ question.likes.count }}</a>
+                    {% endif %}
+                </small>
+            </li>
         {% endfor %}
+    </ul>
 {% endblock %}

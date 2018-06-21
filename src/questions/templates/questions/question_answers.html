@@ -1,0 +1,11 @@
+        {% for answer in answers %}
+            <li class="list-group-item list-group-item-light mt-3">
+                <p>{{ answer.text }}</p>
+                <small>
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url "user_detail" pk=question.author.id %}">{{ question.author }}</a>
+                        {{ answer.created }}
+                    </div>
+                </small>
+            </li>
+        {% endfor %}

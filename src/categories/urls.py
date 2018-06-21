@@ -1,7 +1,7 @@
 from django.conf.urls import url
-from categories.views import category_list, category_detail
+from categories import views
 
 urlpatterns = [
-    url(r'^$', category_list, name='category_list'),
-    url(r'^(?P<pk>\S+)/$', category_detail, name='category_detail'),
+    url(r'^$', views.CategoryList.as_view(), name='category_list'),
+    url(r'^(?P<pk>\S+)/$', views.category_detail, name='category_detail'),
 ]

@@ -4,11 +4,11 @@ from django import forms
 class QuestionListForm(forms.Form):
     sort = forms.ChoiceField(choices=(
         ('-created', 'newest'),
-        ('title', 'title')
+        ('title', 'title'),
     ), required=False)
     search = forms.CharField(required=False)
 
 
-class AnswerForm(forms.Form):
+class AnswerCreateForm(forms.Form):
     text = forms.CharField(required=True)
 

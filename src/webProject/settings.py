@@ -42,11 +42,17 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'questions.apps.QuestionsConfig',
     'likes.apps.LikesConfig',
+    'crispy_forms',
+    'widget_tweaks',
+    'debug_toolbar',
 ]
 
 AUTH_USER_MODEL = 'core.User'
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,6 +61,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+INTERNAL_IPS = ('127.0.0.1',)
 
 ROOT_URLCONF = 'webProject.urls'
 
@@ -69,10 +77,18 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'core.context_processors.overall_stats',
             ],
         },
     },
 ]
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
 
 WSGI_APPLICATION = 'webProject.wsgi.application'
 
@@ -128,7 +144,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = ''
 
 LOGIN_URL = '/users/login/'
+
 
 

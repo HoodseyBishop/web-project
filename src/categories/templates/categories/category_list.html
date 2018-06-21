@@ -1,22 +1,36 @@
 {% extends 'core/base.html'%}
+{% load crispy_forms_filters %}
+{% load widget_tweaks %}
 
-{% block title %} Categories {% endblock %}
+{% block header %} Categories {% endblock %}
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{% url 'main' %}">Main</a></li>
+    <li class="breadcrumb-item active">Categories</li>
+{% endblock %}
 
 {% block content %}
-    <form action="" method="post">
-        {% csrf_token %}
-        Add new:
-        {{ category_form }}
-        <input type="submit" value="Add">
-    </form>
-    <div>
-        <form action="" method="get">
-            {{ search_form }}
-            <button>Go</button>
+    <div class="d-flex justify-content-between">
+        <form action="" method="get" class="form-inline">
+            {{ search_form.sort|add_class:"form-control" }}
+            {{ search_form.search|add_class:"form-control" }}
+            <input class="btn btn-primary" type="submit" value="Go">
         </form>
+        {% if user.is_authenticated %}
+            <form method="post" class="form-inline">
+                {% csrf_token %}
+                {{ category_form.name|add_class:"form-control" }}
+                <input class="btn btn-primary" type="submit" value="Add new">
+            </form>
+        {% endif %}
     </div>
-    {% for category in categories %}
-        <a href="{% url "category_detail" pk=category.name|urlencode %}"> {{ category.name }}</a><br>
-        questions:{{ category.questions.count }} <br><br>
-    {% endfor %}
+    <hr>
+    <ul class="list-group">
+        {% for category in categories %}
+            <a class="list-group-item list-group-item-info mt-3" href="{% url "category_detail" pk=category.pk %}">
+                <p>{{ category.name }}</p>
+                <hr>
+                <p><small>{{ category.question_count }} questions</small></p>
+            </a>
+        {% endfor %}
+    </ul>
 {% endblock %}
